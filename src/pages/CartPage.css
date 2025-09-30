@@ -1,0 +1,169 @@
+.cart-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+}
+.cart-empty {
+  text-align: center;
+  margin-top: 50px;
+}
+.btn-shop {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+/* --- FIXES FOR THE LAYOUT --- */
+.cart-item {
+  display: flex; /* This is the key: it arranges children in a row */
+  align-items: center; /* Vertically aligns items to the center */
+  gap: 20px; /* Adds space between the items */
+  border-bottom: 1px solid #333;
+  padding: 20px 0;
+}
+.cart-item-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0; /* Prevents the image from shrinking */
+}
+.cart-item-details {
+  flex-grow: 1; /* Allows this section to take up the most space */
+  text-align: left;
+}
+.cart-item-details h3 {
+  margin: 0 0 5px 0;
+}
+.cart-item-actions {
+  text-align: right;
+}
+.btn-remove {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+/* --- END OF LAYOUT FIXES --- */
+
+.cart-summary {
+  margin-top: 30px;
+  text-align: right;
+}
+.btn-checkout {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.cart-quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+.cart-quantity-control button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #555;
+  background-color: #333;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 50%;
+}
+.cart-quantity-control span {
+  font-size: 1.1rem;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* Add these styles to your CartPage.css file */
+
+.cart-item.unavailable {
+  opacity: 0.6;
+  background-color: #2a2a2a;
+  border-color: #444;
+}
+
+.unavailable-text {
+  color: #e53e3e; /* Red color */
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin: 5px 0;
+}
+
+.cart-item.unavailable .cart-quantity-control button {
+  cursor: not-allowed;
+  background-color: #444;
+}
+
+.checkout-error {
+  color: #e53e3e;
+  font-size: 0.9rem;
+  margin-top: -10px;
+  margin-bottom: 15px;
+}
+
+/* --- NEW button style --- */
+.btn-continue-shopping {
+  background-color: transparent;
+  color: #ccc;
+  border: 1px solid #555;
+  padding: 15px 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  align-self: flex-start; /* Aligns button to the top of the flex container */
+}
+
+.btn-continue-shopping:hover {
+  background-color: #333;
+  color: white;
+}
+
+/* Make the button green in the empty cart view */
+.btn-continue-shopping.primary {
+  background-color: #4CAF50;
+  border-color: #4CAF50;
+  color: white;
+}
+.btn-continue-shopping.primary:hover {
+  background-color: #45a049;
+}
+
+
+/* --- UPDATED summary layout --- */
+.cart-summary {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Aligns the top of the button with the top of the checkout section */
+  flex-wrap: wrap; /* Allows items to stack on small screens */
+  gap: 20px;
+}
+
+.checkout-section {
+  text-align: right;
+}
+
+/* --- Rename .btn-shop to .btn-continue-shopping for consistency --- */
+.cart-empty {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.btn-checkout {
+  text-decoration: none;
+}

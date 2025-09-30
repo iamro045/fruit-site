@@ -1,0 +1,51 @@
+.hero-container {
+  /* --- Background Image & Sizing --- */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1571575239210-352353f2c3c9?q=80&w=2070');
+  height: 60vh; /* Takes up 60% of the viewport height */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+
+  /* --- Flexbox for Centering Content --- */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white; /* Text color for all content inside */
+}
+
+.hero-content {
+  max-width: 700px; /* Limits the width of the text for readability */
+}
+
+.hero-title {
+  font-size: 3.5rem; /* Large, impactful headline */
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  font-weight: 400;
+}
+
+.hero-button {
+  /* --- Stylish Call-to-Action Button --- */
+  background-color: #4CAF50; /* Our green accent color */
+  color: white;
+  padding: 15px 35px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px; /* Fully rounded "pill" shape */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-transform: uppercase;
+}
+
+.hero-button:hover {
+  background-color: #45a049; /* Slightly darker green on hover */
+  transform: scale(1.05); /* Slightly enlarge the button on hover */
+}

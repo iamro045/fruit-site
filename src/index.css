@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+body {
+  margin: 0; /* Remove default browser margin */
+  font-family: 'Poppins', sans-serif;
+  background-color: #121212;
+  color: #f9f9f9;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure the root element takes up full height */
+#root {
+  min-height: 100vh;
+}

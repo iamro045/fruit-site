@@ -1,0 +1,182 @@
+.fruit-detail-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+
+.product-layout-grid {
+  display: flex; /* Changed to flex for more control */
+  gap: 40px;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
+/* --- NEW IMAGE GALLERY STYLES --- */
+.fruit-image-gallery {
+  display: flex;
+  flex-direction: row-reverse; /* Puts thumbnails on the left */
+  gap: 15px;
+  flex: 1; /* Takes up half the space */
+  max-width: 550px;
+}
+.main-image-container {
+  flex-grow: 1;
+}
+.main-image {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #333;
+}
+.thumbnail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.thumbnail-item {
+  width: 80px;
+  height: 80px;
+  border: 2px solid #444;
+  border-radius: 8px;
+  cursor: pointer;
+  overflow: hidden;
+}
+.thumbnail-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.thumbnail-item.active {
+  border-color: #4CAF50; /* Highlight active thumbnail */
+}
+
+/* --- RIGHT COLUMN --- */
+.fruit-details-column {
+  flex: 1; /* Takes up the other half */
+  text-align: left;
+}
+
+/* ... (other styles like h1, rating, price, highlights, etc. remain the same) ... */
+
+/* --- NEW "OUT OF STOCK" BUTTON --- */
+.out-of-stock-btn {
+  background-color: #555;
+  color: #aaa;
+  width: 100%;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: not-allowed;
+}
+
+/* --- INFO BAR IS NOW A SEPARATE SECTION --- */
+/* The InfoBar component has its own styles, just ensure it has some margin */
+.info-bar {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.product-accordion {
+  margin-top: 30px;
+  text-align: left;
+}
+
+/* Quantity Selector */
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  justify-content: flex-start; /* Aligns the whole component to the left */
+}
+
+.quantity-selector button {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #555;
+  background-color: #333;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 0; /* Square corners to fit together */
+  transition: background-color 0.2s;
+}
+
+.quantity-selector button:hover {
+  background-color: #444;
+}
+
+/* Round the outer corners of the buttons */
+.quantity-selector button:first-of-type {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.quantity-selector button:last-of-type {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.quantity-selector input {
+  width: 60px;
+  height: 40px;
+  text-align: center;
+  
+  /* --- KEY FIXES for the 'white box' --- */
+  background-color: #222; /* Dark background */
+  color: white;           /* Light text color */
+  border: 1px solid #555;  /* Matching border */
+  border-left: none;      /* Remove inner left border */
+  border-right: none;     /* Remove inner right border */
+  
+  font-size: 1.2rem;
+  box-sizing: border-box;
+  
+  /* Hides the default arrows on number inputs */
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  appearance: none;
+}
+
+.add-to-cart-btn {
+  width: 100%; /* Makes the button fill the column width */
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 8px; /* Matches the other rounded corners */
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #45a049; /* Slightly darker green */
+  transform: translateY(-2px); /* Adds a subtle "lift" effect */
+}
+
+.back-link {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  margin-bottom: 30px;
+  background-color: #2a2a2a;
+  color: #f9f9f9;
+  border: 1px solid #444;
+  border-radius: 50%; /* Makes it a perfect circle */
+  font-size: 1.5rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.back-link:hover {
+  background-color: #4CAF50;
+  transform: scale(1.1); /* Slightly enlarges the button on hover */
+}
+

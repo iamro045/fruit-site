@@ -1,0 +1,13 @@
+.fruit-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.no-fruits-found {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #aaa;
+  padding: 50px;
+}

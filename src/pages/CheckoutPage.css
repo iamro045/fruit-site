@@ -1,0 +1,107 @@
+.checkout-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+}
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* 2/3 for the form, 1/3 for the summary */
+  gap: 40px;
+}
+
+/* --- Form Styles --- */
+.checkout-form h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #444;
+  padding-bottom: 10px;
+}
+.checkout-form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  background-color: #222;
+  border: 1px solid #555;
+  border-radius: 5px;
+  color: white;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+.form-row input {
+  width: 100%;
+}
+.payment-warning {
+  font-size: 0.9rem;
+  color: #facc15;
+  background-color: rgba(250, 204, 21, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+}
+.btn-place-order {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+/* --- Order Summary Styles --- */
+.order-summary {
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  height: fit-content; /* Makes the box only as tall as its content */
+}
+.order-summary h2 {
+  margin-top: 0;
+}
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: #ccc;
+}
+.order-summary hr {
+  border: none;
+  border-top: 1px solid #444;
+  margin: 20px 0;
+}
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Add these new styles to CheckoutPage.css */
+
+.payment-upi-section {
+  text-align: center;
+  padding: 20px;
+  background-color: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.upi-logo {
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.payment-upi-section p {
+  font-size: 0.9rem;
+  color: #aaa;
+  line-height: 1.5;
+  margin: 0;
+}

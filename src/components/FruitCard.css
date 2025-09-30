@@ -1,0 +1,48 @@
+/* src/components/FruitCard.css */
+
+.fruit-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.fruit-card {
+  background-color: #1e1e1e; /* A slightly lighter dark color */
+  border: 1px solid #333;
+  border-radius: 12px; /* Softer corners */
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2); /* A more pronounced shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative; /* Needed for the add-to-cart button */
+}
+
+.fruit-card:hover {
+  transform: translateY(-8px); /* A bigger lift effect */
+  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.2); /* Green glow effect */
+}
+
+.fruit-card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.fruit-card-body {
+  padding: 15px;
+}
+
+.fruit-card-title {
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+  color: #f9f9f9;
+}
+
+.fruit-card-price {
+  font-weight: bold;
+  color: #4CAF50; /* Use the accent color for the price */
+}
+
+.fruit-card-unit {
+  font-weight: normal;
+  color: #aaa;
+  font-size: 0.9rem;
+}
