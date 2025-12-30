@@ -1,91 +1,163 @@
-/* src/components/Navbar.css */
-
+/* --- Core Navbar: Glassmorphism Effect --- */
 .navbar {
-  /* --- Core Layout & Styling --- */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;           /* Increased padding for more breathing room */
-  background-color: #1f1f1f;   /* A dark background to match your theme */
-  border-bottom: 1px solid #333; /* A subtle line to separate it from content */
-  position: sticky;              /* Make it stick to the top when you scroll */
+  padding: 1rem 2rem;
+  position: sticky;
   top: 0;
-  z-index: 1000;                 /* Ensures it stays above other content */
+  z-index: 1000;
+  
+  /* The Glassmorphism Effect */
+  background-color: rgba(25, 25, 25, 0.7); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* The frosted glass blur */
+  -webkit-backdrop-filter: blur(10px); /* For Safari compatibility */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
 }
 
+/* --- Logo Styling --- */
 .nav-logo {
-  /* --- Logo Styling --- */
-  font-size: 1.75rem;          /* Make the logo bigger and more prominent */
-  font-weight: 700;            /* A bolder font weight */
-  color: #f9f9f9;             /* Light text color for contrast */
-  text-decoration: none;
-  letter-spacing: 1px;         /* Adds a bit of premium spacing */
-  transition: color 0.3s ease; /* Smooth color change on hover */
-}
-
-.nav-logo:hover {
-  color: #4CAF50; /* A nice green accent color on hover */
-}
-
-.nav-cart-link {
-  /* --- Cart Link Styling --- */
-  position: relative; /* Required for positioning the badge correctly */
-  font-size: 1.2rem;
+  font-size: 1.75rem;
+  font-weight: 700;
   color: #f9f9f9;
   text-decoration: none;
-  padding: 10px;    /* Gives it a larger clickable area */
-  border-radius: 8px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: color 0.3s ease;
+}
+.nav-logo:hover {
+  color: #4CAF50;
 }
 
-.nav-cart-link:hover {
-  background-color: #333; /* Subtle highlight on hover */
-  transform: scale(1.05);  /* Slightly grow the icon on hover */
-}
-
-.cart-badge {
-  /* --- A much cleaner badge --- */
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  background-color: #e53e3e; /* A vibrant, eye-catching red */
-  color: white;
-  border-radius: 50%;        /* Makes it a perfect circle */
-  width: 22px;               /* Fixed width */
-  height: 22px;              /* Fixed height */
-  display: flex;             /* Use flexbox to perfectly center the number */
-  justify-content: center;
-  align-items: center;
-  font-size: 0.75rem;
-  font-weight: bold;
-  border: 2px solid #1f1f1f; /* A border that matches the navbar background */
-}
-
-/* Add these new classes to src/components/Navbar.css */
-
+/* --- Search Bar with Internal Icon --- */
 .search-container {
-  flex-grow: 1; /* Allows the search bar to take up available space */
+  position: relative;
+  flex-grow: 1;
   margin: 0 2rem;
-  max-width: 500px; /* Optional: sets a max width */
+  max-width: 500px;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  color: #888;
+  transition: color 0.3s ease;
 }
 
 .search-input {
   width: 100%;
-  padding: 10px 15px;
+  padding: 12px 20px 12px 45px; /* Increased left padding for the icon */
   font-size: 1rem;
-  border: 1px solid #444;
-  border-radius: 20px; /* Rounded corners */
-  background-color: #2c2c2c;
+  border: 1px solid transparent; /* Transparent border initially */
+  border-radius: 50px; /* Pill shape */
+  background-color: rgba(0, 0, 0, 0.3);
   color: #f9f9f9;
-  outline: none; /* Removes the default blue outline on click */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+  transition: all 0.3s ease;
 }
 
 .search-input::placeholder {
   color: #888;
 }
 
+/* Animate search bar on focus */
 .search-input:focus {
-  border-color: #4CAF50; /* Green highlight on focus */
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3); /* Adds a soft glow */
+  background-color: rgba(0, 0, 0, 0.5);
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+}
+.search-input:focus + .search-icon {
+  color: #4CAF50;
+}
+
+
+/* --- Right-side Action Icons --- */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.nav-cart-link, .nav-login-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  color: #f9f9f9;
+  font-size: 1.3rem;
+  text-decoration: none;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-cart-link:hover, .nav-login-link:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Badge styling */
+.cart-badge {
+  position: absolute;
+  top: -2px;
+  right: -4px;
+  background-color: #e53e3e;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.7rem;
+  font-weight: bold;
+  border: 2px solid #1a1a1a;
+}
+
+/* Replace .nav-cart-link and .nav-login-link with this in Navbar.css */
+.nav-action-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  color: #f9f9f9;
+  font-size: 1.4rem;
+  text-decoration: none;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-action-link:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.btn-logout {
+  background: none;
+  border: 1px solid #555;
+  color: #ccc;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn-logout:hover {
+  background-color: #333;
+}
+
+.user-menu-link {
+  color: #ccc;
+  text-decoration: none;
+}
+.user-menu-link:hover {
+  color: #4CAF50;
 }

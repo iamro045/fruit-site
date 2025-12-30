@@ -1,16 +1,48 @@
-# React + Vite
+Groott - A Full-Stack Fruit E-commerce Website
+Groott is a complete MERN stack (MongoDB, Express.js, React, Node.js) e-commerce application built from the ground up. It serves as a comprehensive, feature-rich portfolio project demonstrating a wide range of modern web development practices.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 Live Demo
+You can view the live project here: https://iamro045.github.io/fruit-site/
 
-Currently, two official plugins are available:
+✨ Key Features
+Customer Experience
+Modern UI/UX: A professional, responsive dark theme with a "glassmorphism" navbar and a full-screen hero section.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Product Catalog: Browse, search, and filter a wide variety of fruits.
 
-## React Compiler
+Professional Product Pages: Detailed product views with an image gallery, highlights, star ratings, and collapsible accordion sections for details, nutrition, and reviews.
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Full E-commerce Flow: A complete shopping experience from adding items to a persistent, database-backed cart to a multi-step checkout with a simulated UPI payment.
 
-## Expanding the ESLint configuration
+User Accounts: Customers can sign up, log in, and view their order history.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Order Management: A dedicated page for users to track their order status with a visual timeline.
+
+Admin Functionality
+Secure Admin Login: Separate login for administrators.
+
+Product Management: A protected admin dashboard with the backend infrastructure to perform full CRUD (Create, Read, Update, Delete) operations on products.
+
+Role-Based Access: The backend uses JWT and custom middleware to ensure only authenticated admins can access management routes.
+
+🛠️ Tech Stack
+Frontend: React (with Vite), React Router, Axios, React Icons
+
+Backend: Node.js, Express.js
+
+Database: MongoDB (with Mongoose)
+
+Authentication: JSON Web Tokens (JWT), bcrypt.js
+
+Styling: CSS with a focus on modern, responsive design patterns like Flexbox and Grid.
+
+🚀 Getting Started
+To get a local copy up and running, follow these simple steps.
+
+Prerequisites
+Node.js (v18 or later recommended)
+
+npm (or your preferred package manager)
+
+A MongoDB Atlas account and a connection string
+

@@ -9,7 +9,8 @@ import CustomerReviews from '../components/CustomerReviews';
 import AccordionItem from '../components/AccordionItem'; // NEW: Import the AccordionItem component
 
 const getImageUrl = (name) => {
-  return new URL(`../assets/${name}`, import.meta.url).href;
+  // Points to your backend's public/assets folder
+  return `http://localhost:5001/assets/${name}`;
 };
 
 const FruitDetailPage = () => {
@@ -22,7 +23,7 @@ const FruitDetailPage = () => {
   // REMOVED: const [activeTab, setActiveTab] = useState("description");
 
   useEffect(() => {
-    fetch("/fruits.json")
+    fetch(`${import.meta.env.BASE_URL}fruits.json`)
       .then((res) => res.json())
       .then((fruits) => {
         const selectedFruit = fruits.find((f) => f.id === fruitId);

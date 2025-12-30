@@ -2,7 +2,6 @@ import React from 'react';
 import { FaStar } from 'react-icons/fa';
 import './CustomerReviews.css';
 
-// A small helper component to render the star rating for each review
 const StarRating = ({ rating }) => {
   const stars = Array(5).fill(0).map((_, index) => (
     <FaStar key={index} color={index < rating ? '#facc15' : '#444'} />

@@ -3,18 +3,16 @@ import { Link } from 'react-router-dom';
 import './FruitCard.css';
 
 const getImageUrl = (name) => {
-  return new URL(`../assets/${name}`, import.meta.url).href;
+  return `http://localhost:5001/assets/${name}`;
 };
-
 const FruitCard = ({ fruit }) => {
-  // A small check to make sure there is an image to display
   const mainImage = fruit.images && fruit.images.length > 0 ? fruit.images[0] : '';
 
   return (
     <Link to={`/fruit/${fruit.id}`} className="fruit-card-link">
-      <div className="fruit-card">
+      {/* Add the fruit's unique ID to this div */}
+      <div className="fruit-card" id={fruit.id}>
         <img 
-          // Use the first image from the 'images' array
           src={getImageUrl(mainImage)} 
           alt={fruit.name} 
           className="fruit-card-image" 

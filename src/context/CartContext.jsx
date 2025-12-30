@@ -1,103 +1,114 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import { useAuth } from './AuthContext'; // To know if a user is logged in
+import api from '../api'; // Our centralized axios instance
 
 const CartContext = createContext();
 
-export const useCart = () => {
-  return useContext(CartContext);
-};
+export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState(() => {
-    try {
-      const localData = localStorage.getItem('cartItems');
-      return localData ? JSON.parse(localData) : [];
-    } catch (error) {
-      console.error("Error parsing cart data from localStorage", error);
-      return [];
-    }
-  });
+  const [cartItems, setCartItems] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const { user } = useAuth(); // Get the current user from our AuthContext
 
+  // This useEffect runs whenever the user logs in or logs out
   useEffect(() => {
-    const syncCartWithData = async () => {
-      try {
-        const response = await fetch('/fruits.json');
-        const freshData = await response.json();
-        
-        // --- FIX: Added a try...catch for safety ---
-        let storedCart = [];
+    const loadCart = async () => {
+      // If a user is logged in, fetch their cart from the database
+      if (user) {
+        setLoading(true);
         try {
-          storedCart = JSON.parse(localStorage.getItem('cartItems')) || [];
+          const response = await api.get('/cart');
+          setCartItems(response.data);
         } catch (error) {
-          console.error("Could not parse stored cart, starting fresh.", error);
+          console.error("Failed to fetch user's cart", error);
+        } finally {
+          setLoading(false);
         }
-
-        const syncedCart = storedCart.map(cartItem => {
-          const freshItemData = freshData.find(fruit => fruit.id === cartItem.id);
-          if (freshItemData) {
-            return {
-              ...freshItemData,
-              quantity: cartItem.quantity,
-            };
-          }
-          return null;
-        }).filter(Boolean);
-
-        setCartItems(syncedCart);
-      } catch (error) {
-        console.error("Failed to sync cart:", error);
+      } else {
+        // If the user logs out, clear the cart state
+        setCartItems([]);
       }
     };
 
-    syncCartWithData();
-  }, []);
+    loadCart();
+  }, [user]); // The dependency array ensures this runs when 'user' changes
 
-  useEffect(() => {
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-  }, [cartItems]);
+  // All cart functions are now ASYNC and make API calls if the user is logged in
+  
+  const addToCart = async (fruit, quantityToAdd = 1) => {
+    if (!user) {
+      alert("Please log in to add items to your cart.");
+      return;
+    }
+    const existingItem = cartItems.find(item => item.id === fruit.id);
+    const newQuantity = existingItem ? existingItem.quantity + quantityToAdd : quantityToAdd;
+    try {
+      await api.post('/cart', { productId: fruit.id, quantity: newQuantity });
+      const response = await api.get('/cart'); // Refetch cart to get the latest state
+      setCartItems(response.data);
+    } catch (error) {
+      console.error("Failed to add to cart", error);
+    }
+  };
 
-  // ... (addToCart, removeFromCart, and other functions remain the same) ...
+  const removeFromCart = async (productId) => {
+    if (!user) return;
+    try {
+      await api.delete(`/cart/${productId}`);
+      setCartItems(prevItems => prevItems.filter(item => item.id !== productId));
+    } catch (error) {
+      console.error("Failed to remove from cart", error);
+    }
+  };
 
-  const addToCart = (fruit, quantityToAdd = 1) => {
-    setCartItems(prevItems => {
-      const isItemInCart = prevItems.find(item => item.id === fruit.id);
-      if (isItemInCart) {
-        return prevItems.map(item =>
-          item.id === fruit.id ? { ...item, quantity: item.quantity + quantityToAdd } : item
-        );
-      } else {
-        return [...prevItems, { ...fruit, quantity: quantityToAdd }];
-      }
-    });
+  const updateQuantity = async (productId, newQuantity) => {
+    if (!user) return;
+    if (newQuantity === 0) {
+      removeFromCart(productId);
+      return;
+    }
+    try {
+      await api.post('/cart', { productId: productId, quantity: newQuantity });
+      const response = await api.get('/cart');
+      setCartItems(response.data);
+    } catch (error) {
+      console.error("Failed to update quantity", error);
+    }
+  };
+
+  const increaseQuantity = (productId) => {
+    const item = cartItems.find(item => item.id === productId);
+    if (item) updateQuantity(productId, item.quantity + 1);
+  };
+
+  const decreaseQuantity = (productId) => {
+    const item = cartItems.find(item => item.id === productId);
+    if (item) updateQuantity(productId, item.quantity - 1);
   };
   
-  const removeFromCart = (fruitId) => {
-    setCartItems(prevItems => prevItems.filter(item => item.id !== fruitId));
-  };
-
-  const increaseQuantity = (fruitId) => {
-    setCartItems(prevItems =>
-      prevItems.map(item =>
-        item.id === fruitId ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
-  };
-
-  const decreaseQuantity = (fruitId) => {
-    setCartItems(prevItems =>
-      prevItems
-        .map(item =>
-          item.id === fruitId ? { ...item, quantity: item.quantity - 1 } : item
-        )
-        .filter(item => item.quantity > 0)
-    );
+  const clearCart = async () => {
+    // To fully implement this, you'd need a DELETE /api/cart/all endpoint
+    // For now, we'll just remove items one by one on the frontend
+    if (!user) return;
+    try {
+      for (const item of cartItems) {
+        await api.delete(`/cart/${item.id}`);
+      }
+      setCartItems([]);
+    } catch (error) {
+      console.error("Failed to clear cart", error);
+    }
   };
 
   const value = {
     cartItems,
+    loading,
     addToCart,
     removeFromCart,
     increaseQuantity,
     decreaseQuantity,
+    clearCart,
   };
 
   return (

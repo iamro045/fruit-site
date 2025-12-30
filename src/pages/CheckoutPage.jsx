@@ -1,12 +1,25 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
+import { useNavigate } from 'react-router-dom';
+import api from '../api'; // 1. Import your central api instance
 import './CheckoutPage.css';
 
 const CheckoutPage = () => {
-  const { cartItems } = useCart();
-  const [address, setAddress] = useState({ /* ... no changes ... */ });
+  const { cartItems, clearCart } = useCart(); // Make sure clearCart is imported
+  const navigate = useNavigate();
 
-  const handleAddressChange = (e) => { /* ... no changes ... */ };
+  const [address, setAddress] = useState({
+    name: '',
+    phone: '',
+    street: '',
+    city: '',
+    pincode: '',
+    state: ''
+  });
+
+  const handleAddressChange = (e) => {
+    setAddress({ ...address, [e.target.name]: e.target.value });
+  };
 
   const calculateTotal = () => {
     return cartItems
@@ -15,19 +28,30 @@ const CheckoutPage = () => {
       .toFixed(2);
   };
 
-  const handlePlaceOrder = (e) => {
+  // 2. Update the order handler to be async and call the API
+  const handlePlaceOrder = async (e) => {
     e.preventDefault();
-    const totalAmount = calculateTotal();
-    
-    // You can change these details if you like
-    const payeeName = "Groott Fruit Shop";
-    const transactionNote = "Payment for your fruit order";
+    try {
+      const totalAmount = calculateTotal();
+      
+      // Call the new backend endpoint to create an order
+      const response = await api.post('/orders', {
+        cartItems,
+        address,
+        totalAmount,
+      });
 
-    // This creates the UPI payment link with your ID and the dynamic amount
-    const upiUrl = `upi://pay?pa=rohitshinde7922@okaxis&pn=${encodeURIComponent(payeeName)}&am=${totalAmount}&cu=INR&tn=${encodeURIComponent(transactionNote)}`;
+      clearCart();
 
-    // This line will attempt to open the user's default UPI app
-    window.location.href = upiUrl;
+      // The backend now clears the cart. On success, navigate to the Thank You page.
+      // We'll pass the new order ID to the thank you page via the URL.
+      navigate(`/thank-you?orderId=${response.data.orderId}`);
+      
+    } catch (error)
+    {
+      console.error("Failed to place order:", error);
+      alert("There was an error placing your order. Please try again.");
+    }
   };
 
   return (
@@ -46,21 +70,31 @@ const CheckoutPage = () => {
             </div>
             <input type="text" name="state" placeholder="State" onChange={handleAddressChange} required />
 
-            {/* --- REPLACED CREDIT CARD FORM --- */}
             <h2>Payment Method</h2>
             <div className="payment-upi-section">
               <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/UPI-Logo-vector.svg/1200px-UPI-Logo-vector.svg.png" alt="UPI Logo" className="upi-logo" />
-              <p>You will be redirected to your default UPI app (Google Pay, PhonePe, Paytm, etc.) to complete the payment securely.</p>
+              <p>Your order will be placed as "Cash on Delivery".</p>
             </div>
             
             <button type="submit" className="btn-place-order">
-              Pay ₹{calculateTotal()} securely
+              Place Order
             </button>
           </form>
         </div>
 
         <div className="order-summary">
-          {/* ... no changes to the order summary ... */}
+          <h2>Order Summary</h2>
+          {cartItems.map(item => (
+            <div key={item.id} className="summary-item">
+              <span>{item.name} (x{item.quantity})</span>
+              <span>₹{(item.price * item.quantity).toFixed(2)}</span>
+            </div>
+          ))}
+          <hr />
+          <div className="summary-total">
+            <strong>Total Payable</strong>
+            <strong>₹{calculateTotal()}</strong>
+          </div>
         </div>
       </div>
     </div>

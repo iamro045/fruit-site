@@ -1,0 +1,55 @@
+.offer-banner-section {
+  padding: 50px 20px;
+  background-color: #1a1a1a; /* A slightly different dark shade */
+}
+
+.offer-banner-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  /* Creates a responsive grid that stacks on smaller screens */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.offer-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 25px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.offer-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.offer-icon {
+  font-size: 3rem;
+  flex-shrink: 0;
+}
+
+.offer-text h3 {
+  margin: 0 0 5px 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.offer-text p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+}
+
+/* Unique background colors for each banner */
+.citrus-offer {
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+}
+
+.weekend-offer {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+}

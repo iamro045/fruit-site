@@ -1,0 +1,45 @@
+.thank-you-container {
+  max-width: 600px;
+  margin: 80px auto;
+  padding: 40px;
+  text-align: center;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  border: 1px solid #333;
+}
+.success-icon {
+  font-size: 5rem;
+  color: #4CAF50;
+  margin-bottom: 20px;
+}
+.thank-you-container h1 {
+  margin-bottom: 15px;
+}
+.thank-you-container p {
+  color: #aaa;
+  line-height: 1.6;
+}
+.btn-home {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 15px 35px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #4CAF50;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+.btn-home:hover {
+  background-color: #45a049;
+}
+
+.order-id-display {
+  background-color: #2a2a2a;
+  padding: 10px 15px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-top: 10px;
+  border: 1px dashed #555;
+}
