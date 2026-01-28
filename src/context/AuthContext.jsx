@@ -8,10 +8,10 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // Add a loading state
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // --- NEW: Check for a token on initial app load ---
+  // --- Check for a token on initial app load ---
   useEffect(() => {
     const loadUser = async () => {
       const token = localStorage.getItem('token');
@@ -43,8 +43,19 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // --- UPDATED: Full Signup Logic ---
   const signup = async (name, email, password) => {
-    // ... no changes to this function
+    // 1. Send data to the backend
+    const response = await api.post('/users/register', { name, email, password });
+    
+    // 2. Save the token
+    localStorage.setItem('token', response.data.token);
+    
+    // 3. Set the user in state
+    setUser(response.data.user);
+    
+    // 4. Navigate to home
+    navigate('/');
   };
 
   const logout = () => {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext'; // 1. Import useAuth
+import { Link, useNavigate } from 'react-router-dom'; // 1. Import useNavigate
+import { useAuth } from '../context/AuthContext';
 import './SignUpPage.css';
 
 const SignUpPage = () => {
@@ -10,7 +10,9 @@ const SignUpPage = () => {
     password: '',
   });
   const [error, setError] = useState('');
-  const { signup } = useAuth(); // 2. Get the signup function from context
+  
+  const { signup } = useAuth();
+  const navigate = useNavigate(); // 2. Initialize hook
 
   const { name, email, password } = formData;
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,9 +21,11 @@ const SignUpPage = () => {
     e.preventDefault();
     setError('');
     try {
-      // 3. Call the context's signup function
       await signup(name, email, password);
+      // 3. Navigate to home page on success
+      navigate('/'); 
     } catch (err) {
+      console.error(err);
       setError(err.response?.data?.message || 'Registration failed. Please try again.');
     }
   };
@@ -31,6 +35,7 @@ const SignUpPage = () => {
       <form className="signup-form" onSubmit={handleSubmit}>
         <h1>Create Account</h1>
         {error && <p className="signup-error">{error}</p>}
+        {/* ... inputs ... */}
         <div className="form-group">
           <label htmlFor="name">Full Name</label>
           <input type="text" id="name" name="name" value={name} onChange={onChange} required />
