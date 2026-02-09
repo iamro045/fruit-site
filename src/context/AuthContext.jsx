@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // --- Check for a token on initial app load ---
+  
   useEffect(() => {
     const loadUser = async () => {
       const token = localStorage.getItem('token');
