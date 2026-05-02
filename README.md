@@ -32,7 +32,7 @@ This project is built using the **MERN** stack:
 
 ## 📂 Project Structure
 
-The project is organized into two distinct repositories (or folders) to separate the client and server concerns.
+The project is organized into two distinct folders to separate the client and server concerns.
 ```text
 GROOTT/
 ├── fruit-backend/       # Node/Express API Server
