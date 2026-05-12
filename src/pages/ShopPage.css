@@ -1,0 +1,67 @@
+.shop-page {
+  padding-top: var(--nav-height);
+  min-height: 100vh;
+}
+.shop-page__header {
+  text-align: center;
+  padding: 60px 40px 40px;
+}
+.shop-page__title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.shop-page__title em { color: var(--leaf-light); font-style: italic; }
+.shop-page__sub { color: var(--text-secondary); font-size: 0.95rem; }
+
+.shop-page__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px 80px;
+}
+
+.shop-page__controls {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: -20px;
+}
+
+.shop-sort {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  outline: none;
+  cursor: pointer;
+  font-family: inherit;
+  margin-bottom: 36px;
+}
+
+.shop-loading {
+  text-align: center;
+  padding: 80px 0;
+  color: var(--text-muted);
+}
+.shop-loading__spinner {
+  display: inline-block;
+  width: 36px; height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: var(--leaf-light);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+  margin-bottom: 14px;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 600px) {
+  .shop-page__inner { padding: 0 20px 60px; }
+  .shop-page__header { padding: 48px 20px 32px; }
+}

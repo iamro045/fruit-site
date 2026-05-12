@@ -1,33 +1,34 @@
 import React from 'react';
-import { FaStar } from 'react-icons/fa';
 import './CustomerReviews.css';
 
-const StarRating = ({ rating }) => {
-  const stars = Array(5).fill(0).map((_, index) => (
-    <FaStar key={index} color={index < rating ? '#facc15' : '#444'} />
-  ));
-  return <div className="review-stars">{stars}</div>;
-};
+const REVIEWS = [
+  { name: 'Priya M.',  city: 'Mumbai',     emoji: '🥭', text: 'The Alphonso mangoes are absolutely divine. Best I\'ve tasted outside Ratnagiri!' },
+  { name: 'Arjun K.',  city: 'Pune',       emoji: '🍎', text: 'Super fresh, great packaging, and delivery was on time. Ordering every week now!' },
+  { name: 'Sneha R.',  city: 'Aurangabad', emoji: '🍊', text: 'Love the variety. The Navel oranges are so juicy. My kids can\'t get enough!' },
+];
 
-const CustomerReviews = ({ reviews }) => {
-  if (!reviews || reviews.length === 0) {
-    return <p>No reviews yet. Be the first to review this product!</p>;
-  }
-
-  return (
-    <div className="customer-reviews-container">
-      {reviews.map(review => (
-        <div key={review.id} className="review-item">
-          <div className="review-header">
-            <strong className="review-author">{review.author}</strong>
-            <span className="review-date">{new Date(review.date).toLocaleDateString('en-IN')}</span>
+const CustomerReviews = () => (
+  <section className="reviews">
+    <div className="reviews__header">
+      <span className="reviews__label">Reviews</span>
+      <h2 className="reviews__title">What Our Customers Say</h2>
+    </div>
+    <div className="reviews__grid">
+      {REVIEWS.map((r) => (
+        <div key={r.name} className="review-card">
+          <div className="review-card__stars">{'★★★★★'}</div>
+          <p className="review-card__text">"{r.text}"</p>
+          <div className="review-card__author">
+            <div className="review-card__avatar">{r.emoji}</div>
+            <div>
+              <div className="review-card__name">{r.name}</div>
+              <div className="review-card__city">{r.city}</div>
+            </div>
           </div>
-          <StarRating rating={review.rating} />
-          <p className="review-comment">{review.comment}</p>
         </div>
       ))}
     </div>
-  );
-};
+  </section>
+);
 
 export default CustomerReviews;

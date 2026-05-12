@@ -1,55 +1,57 @@
-.offer-banner-section {
-  padding: 50px 20px;
-  background-color: #1a1a1a; /* A slightly different dark shade */
-}
-
-.offer-banner-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  /* Creates a responsive grid that stacks on smaller screens */
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 25px;
-}
-
-.offer-card {
+.offer-banner {
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, #1a2e16, #1f3b1a, #162412);
+  border: 1px solid rgba(74, 138, 66, 0.28);
+  padding: 26px 36px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 20px;
-  padding: 25px;
-  border-radius: 12px;
-  text-decoration: none;
-  color: white;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 40px;
 }
 
-.offer-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+.offer-banner__bg-leaf {
+  position: absolute;
+  right: -10px; top: -10px;
+  font-size: 8rem;
+  opacity: 0.06;
+  line-height: 1;
+  pointer-events: none;
 }
 
-.offer-icon {
-  font-size: 3rem;
-  flex-shrink: 0;
+.offer-banner__label {
+  font-size: 0.68rem;
+  color: var(--leaf-light);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
 }
-
-.offer-text h3 {
-  margin: 0 0 5px 0;
-  font-size: 1.3rem;
+.offer-banner__title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
   font-weight: 700;
+  color: var(--text-primary);
+}
+.offer-banner__sub {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-top: 3px;
+}
+.offer-banner__code {
+  color: var(--gold);
 }
 
-.offer-text p {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 0.9rem;
-}
-
-/* Unique background colors for each banner */
-.citrus-offer {
-  background: linear-gradient(135deg, #f39c12, #e67e22);
-}
-
-.weekend-offer {
-  background: linear-gradient(135deg, #e74c3c, #c0392b);
+.offer-banner__pill {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: #0d0d0d;
+  padding: 11px 26px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  flex-shrink: 0;
 }

@@ -1,16 +1,9 @@
-/* We don't need any styles for the main .App container itself */
-
-.home-main-content {
-  /* This class centers the fruit list section */
-  padding: 40px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-.section-title {
-  /* This centers the "Our Freshest Selection" title */
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 40px;
-  font-weight: 700;
-} 
+.main-content {
+  flex: 1;
+}

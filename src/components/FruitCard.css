@@ -1,46 +1,164 @@
 .fruit-card-link {
   text-decoration: none;
   color: inherit;
+  display: block;
 }
 
 .fruit-card {
-  background-color: #1e1e1e; 
-  border: 1px solid #333;
-  border-radius: 12px; 
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative; 
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  cursor: pointer;
 }
-
 .fruit-card:hover {
-  transform: translateY(-8px); 
-  box-shadow: 0 8px 25px rgba(76, 175, 80, 0.2); 
+  border-color: rgba(74, 138, 66, 0.45);
+  transform: translateY(-8px);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.5);
+}
+.fruit-card--oos { opacity: 0.72; }
+
+/* Badges */
+.fruit-card__badge {
+  position: absolute;
+  top: 12px;
+  z-index: 2;
+  padding: 3px 12px;
+  border-radius: 50px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.fruit-card__badge--premium,
+.fruit-card__badge--bestseller {
+  left: 12px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: #0d0d0d;
+}
+.fruit-card__badge--bestseller {
+  background: linear-gradient(135deg, var(--leaf), var(--leaf-light));
+  color: #fff;
+}
+.fruit-card__badge--seasonal,
+.fruit-card__badge--summer-special {
+  left: 12px;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
+}
+.fruit-card__badge--oos {
+  right: 12px;
+  background: rgba(231, 76, 60, 0.88);
+  color: #fff;
 }
 
-.fruit-card-image {
+/* Image area */
+.fruit-card__img-wrap {
+  height: 165px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.fruit-card__img {
   width: 100%;
-  height: 200px;
+  height: 100%;
   object-fit: cover;
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.fruit-card:hover .fruit-card__img {
+  transform: scale(1.08);
+}
+.fruit-card__emoji {
+  position: absolute;
+  font-size: 4.2rem;
+  display: none; /* shown only when img fails */
+  filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.35));
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.fruit-card:hover .fruit-card__emoji {
+  transform: scale(1.15) rotate(-5deg);
 }
 
-.fruit-card-body {
-  padding: 15px;
+/* Body */
+.fruit-card__body {
+  padding: 18px 18px 14px;
+}
+.fruit-card__category {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 4px;
+}
+.fruit-card__name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.fruit-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.stars { display: flex; gap: 2px; }
+.star { font-size: 0.72rem; color: var(--text-muted); }
+.star--filled { color: #f1c40f; }
+.fruit-card__reviews {
+  font-size: 0.72rem;
+  color: var(--text-muted);
 }
 
-.fruit-card-title {
-  margin: 0 0 10px 0;
-  font-size: 1.2rem;
-  color: #f9f9f9;
+.fruit-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.fruit-card__price { display: flex; align-items: baseline; gap: 4px; }
+.fruit-card__price-value {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--leaf-light);
+}
+.fruit-card__unit {
+  font-size: 0.72rem;
+  color: var(--text-muted);
 }
 
-.fruit-card-price {
-  font-weight: bold;
-  color: #4CAF50; 
+.fruit-card__add {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(74, 138, 66, 0.16);
+  border: 1px solid rgba(74, 138, 66, 0.38);
+  color: var(--leaf-light);
+  font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.25s ease;
+  cursor: pointer;
 }
-
-.fruit-card-unit {
-  font-weight: normal;
-  color: #aaa;
-  font-size: 0.9rem;
+.fruit-card__add:hover {
+  background: var(--leaf);
+  border-color: var(--leaf);
+  color: #fff;
+  transform: scale(1.1);
+}
+.fruit-card__add--added {
+  background: var(--leaf);
+  color: #fff;
+  transform: scale(0.9);
+}
+.fruit-card__add:disabled {
+  background: rgba(255,255,255,0.04);
+  border-color: var(--border);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  transform: none;
 }

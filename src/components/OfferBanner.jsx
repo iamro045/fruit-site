@@ -1,30 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { FiPercent, FiGift } from 'react-icons/fi'; // Example icons
 import './OfferBanner.css';
 
-const OfferBanner = () => {
-  return (
-    <section className="offer-banner-section">
-      <div className="offer-banner-container">
-        <Link to="/" className="offer-card citrus-offer">
-          <FiPercent className="offer-icon" />
-          <div className="offer-text">
-            <h3>Citrus Fest</h3>
-            <p>Flat 15% off on all Oranges & Lemons</p>
-          </div>
-        </Link>
-        <Link to="/" className="offer-card weekend-offer">
-          <FiGift className="offer-icon" />
-          <div className="offer-text">
-            <h3>Weekend Special</h3>
-            <p>Free box of Strawberries on orders over ₹1000</p>
-          </div>
-        </Link>
-        {/* You can add more offer cards here */}
-      </div>
-    </section>
-  );
-};
+const OfferBanner = () => (
+  <div className="offer-banner">
+    <div className="offer-banner__bg-leaf">🌿</div>
+    <div className="offer-banner__text">
+      <span className="offer-banner__label">Limited Offer</span>
+      <h3 className="offer-banner__title">Get 10% off your first order</h3>
+      <p className="offer-banner__sub">
+        Use code <strong className="offer-banner__code">FRUIT10</strong> at checkout
+      </p>
+    </div>
+    <div className="offer-banner__pill">Claim Offer</div>
+  </div>
+);
 
 export default OfferBanner;

@@ -1,41 +1,25 @@
 import React from 'react';
-// Using modern, clean icons from the Tabler Icons set
-import { TbTruckDelivery, TbClockHour4, TbReplace, TbRosette } from 'react-icons/tb';
 import './InfoBar.css';
 
-const InfoBar = () => {
-  return (
-    <div className="info-bar">
-      <div className="info-item">
-        <TbRosette className="info-icon" />
-        <div className="info-text">
-          <strong>Quality Assured</strong>
-          <span>Freshness Guaranteed</span>
+const ITEMS = [
+  { emoji: '🚚', title: 'Free Delivery',       sub: 'On orders above ₹500' },
+  { emoji: '🌱', title: '100% Organic',         sub: 'No pesticides' },
+  { emoji: '✓',  title: 'Quality Guaranteed',  sub: 'Or money back' },
+  { emoji: '❄️', title: 'Cold Chain',           sub: 'Always fresh' },
+];
+
+const InfoBar = () => (
+  <div className="info-bar">
+    {ITEMS.map((item) => (
+      <div key={item.title} className="info-bar__item">
+        <span className="info-bar__emoji">{item.emoji}</span>
+        <div>
+          <div className="info-bar__title">{item.title}</div>
+          <div className="info-bar__sub">{item.sub}</div>
         </div>
       </div>
-      <div className="info-item">
-        <TbTruckDelivery className="info-icon" />
-        <div className="info-text">
-          <strong>Free Delivery</strong>
-          <span>On orders over ₹500</span>
-        </div>
-      </div>
-      <div className="info-item">
-        <TbClockHour4 className="info-icon" />
-        <div className="info-text">
-          <strong>Arrives in</strong>
-          <span>1-2 Business Days</span>
-        </div>
-      </div>
-      <div className="info-item">
-        <TbReplace className="info-icon" />
-        <div className="info-text">
-          <strong>Easy Returns</strong>
-          <span>3-Day Return Policy</span>
-        </div>
-      </div>
-    </div>
-  );
-};
+    ))}
+  </div>
+);
 
 export default InfoBar;

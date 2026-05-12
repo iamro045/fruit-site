@@ -1,71 +1,100 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'; // 1. Import axios
-import FruitList from '../components/FruitList';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import Hero from '../components/Hero';
-import CategoryFilter from '../components/CategoryFilter'; 
+import FruitList from '../components/FruitList';
+import InfoBar from '../components/InfoBar';
 import OfferBanner from '../components/OfferBanner';
+import CustomerReviews from '../components/CustomerReviews';
+import CategoryFilter from '../components/CategoryFilter';
+import { FRUITS_STATIC } from '../data/fruits';
+import './HomePage.css';
 
-const HomePage = ({ searchTerm }) => { 
+const CATEGORIES_DISPLAY = [
+  { emoji: '🍋', name: 'Citrus',    color: '#e67e22' },
+  { emoji: '🍇', name: 'Berry',     color: '#8e44ad' },
+  { emoji: '🥭', name: 'Tropical',  color: '#27ae60' },
+  { emoji: '🍎', name: 'Temperate', color: '#e74c3c' },
+];
+
+const SectionHeader = ({ label, title, cta, ctaLink }) => (
+  <div className="section-header">
+    <div>
+      {label && <span className="section-label">{label}</span>}
+      <h2 className="section-title" dangerouslySetInnerHTML={{ __html: title }} />
+    </div>
+    {cta && <Link to={ctaLink || '/shop'} className="section-cta">{cta}</Link>}
+  </div>
+);
+
+const HomePage = ({ searchTerm, showToast }) => {
   const [allFruits, setAllFruits] = useState([]);
-  const [filteredFruits, setFilteredFruits] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  const categories = ['All', 'Citrus', 'Berry', 'Tropical', 'Temperate'];
-
-  // 2. Updated this useEffect to fetch from your backend API
   useEffect(() => {
-    const fetchFruits = async () => {
-      try {
-        const response = await axios.get('http://localhost:5001/api/fruits');
-        setAllFruits(response.data); // With axios, the data is in response.data
-      } catch (error) {
-        console.error('Error fetching fruits from API:', error);
-      }
-    };
-    
-    fetchFruits();
+    axios.get('http://localhost:5001/api/fruits')
+      .then(res => setAllFruits(res.data))
+      .catch(() => setAllFruits(FRUITS_STATIC)); // fallback to static data
   }, []);
 
-  useEffect(() => {
-    let results = allFruits;
+  const filtered = allFruits
+    .filter(f => selectedCategory === 'All' || f.category === selectedCategory)
+    .filter(f => !searchTerm || f.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
-    if (selectedCategory !== 'All') {
-      results = results.filter(fruit => fruit.category === selectedCategory);
-    }
-
-    if (searchTerm) {
-      results = results.filter(fruit =>
-        fruit.name.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-    
-    setFilteredFruits(results);
-
-    // Scroll to search result logic
-    if (searchTerm && results.length > 0) {
-      setTimeout(() => {
-        const firstResultId = results[0].id;
-        const element = document.getElementById(firstResultId);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      }, 100);
-    }
-  }, [searchTerm, selectedCategory, allFruits]);
+  const featured    = allFruits.filter(f => f.badge).slice(0, 4);
+  const bestsellers = allFruits.filter(f => f.inStock).sort((a, b) => b.reviews - a.reviews).slice(0, 4);
 
   return (
     <>
       <Hero />
-      <OfferBanner />
-      <main className="home-main-content">
-        <h2 className="section-title">Our Freshest Selection</h2>
-        <CategoryFilter 
-          categories={categories}
-          selectedCategory={selectedCategory}
-          onSelectCategory={setSelectedCategory}
-        />
-        <FruitList fruits={filteredFruits} />
-      </main>
+      <InfoBar />
+
+      {/* Featured Section */}
+      <section className="home-section">
+        <SectionHeader label="Handpicked" title='Featured <em style="color:var(--gold);font-style:italic">Picks</em>' cta="View all →" />
+        <FruitList fruits={featured.length ? featured : allFruits.slice(0, 4)} showToast={showToast} />
+      </section>
+
+      {/* Category Showcase */}
+      <section className="home-section">
+        <SectionHeader label="Browse" title='By <em style="color:var(--gold);font-style:italic">Category</em>' />
+        <div className="category-grid">
+          {CATEGORIES_DISPLAY.map(({ emoji, name, color }) => (
+            <Link
+              to={`/shop?cat=${name}`}
+              key={name}
+              className="category-tile"
+              style={{ '--cat-color': color }}
+            >
+              <span className="category-tile__emoji">{emoji}</span>
+              <span className="category-tile__name">{name}</span>
+              <span className="category-tile__count">
+                {allFruits.filter(f => f.category === name).length} varieties
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Offer Banner */}
+      <section className="home-section">
+        <OfferBanner />
+      </section>
+
+      {/* Bestsellers */}
+      <section className="home-section">
+        <SectionHeader label="Most Loved" title="Bestsellers" cta="View all →" />
+        <FruitList fruits={bestsellers.length ? bestsellers : allFruits.slice(0, 4)} showToast={showToast} />
+      </section>
+
+      {/* Full shop with filter */}
+      <section className="home-section">
+        <SectionHeader label="Our Selection" title='All <em style="color:var(--leaf-light);font-style:italic">Fruits</em>' />
+        <CategoryFilter selectedCategory={selectedCategory} onSelectCategory={setSelectedCategory} />
+        <FruitList fruits={filtered} showToast={showToast} />
+      </section>
+
+      <CustomerReviews />
     </>
   );
 };
