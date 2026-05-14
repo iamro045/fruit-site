@@ -13,7 +13,7 @@ const ShopPage = ({ searchTerm, showToast }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:5001/api/fruits')
+    axios.get(`${import.meta.env.VITE_API_URL}/api/fruits`)
       .then(res => setAllFruits(res.data))
       .catch(() => setAllFruits(FRUITS_STATIC))
       .finally(() => setLoading(false));

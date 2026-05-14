@@ -5,7 +5,7 @@ import './CartPage.css';
 
 const getImageUrl = (name) => {
   // Points to your backend's public/assets folder
-  return `http://localhost:5001/assets/${name}`;
+  return `${import.meta.env.VITE_API_URL}/assets/${name}`;
 };
 
 const CartPage = () => {

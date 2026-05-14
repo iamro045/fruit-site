@@ -14,7 +14,7 @@ const FruitDetailPage = ({ showToast }) => {
   const [tab, setTab] = useState('desc');
 
   useEffect(() => {
-    axios.get(`http://localhost:5001/api/fruits`)
+    axios.get(`${import.meta.env.VITE_API_URL}/api/fruits`)
       .then(res => {
         const found = res.data.find(f => f.id === fruitId);
         setFruit(found || null);

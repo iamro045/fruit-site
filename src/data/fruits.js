@@ -223,4 +223,4 @@ export const FRUITS_STATIC = [
 
 export const CATEGORIES = ['All', 'Citrus', 'Berry', 'Tropical', 'Temperate'];
 
-export const getImageUrl = (name) => `http://localhost:5001/assets/${name}`;
+export const getImageUrl = (name) => `${import.meta.env.VITE_API_URL}/assets/${name}`;

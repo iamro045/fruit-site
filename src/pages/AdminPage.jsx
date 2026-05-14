@@ -3,7 +3,7 @@ import axios from 'axios';
 import './AdminPage.css';
 
 const getImageUrl = (name) => {
-  return `http://localhost:5001/assets/${name}`;
+  return `${import.meta.env.VITE_API_URL}/assets/${name}`;
 };
 
 const AdminPage = () => {
@@ -12,7 +12,7 @@ const AdminPage = () => {
   useEffect(() => {
     const fetchFruits = async () => {
       try {
-        const response = await axios.get('http://localhost:5001/api/fruits');
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/fruits`);
         setFruits(response.data);
       } catch (error) {
         console.error("Failed to fetch fruits:", error);

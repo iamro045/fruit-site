@@ -32,7 +32,7 @@ const HomePage = ({ searchTerm, showToast }) => {
   const [selectedCategory, setSelectedCategory] = useState('All');
 
   useEffect(() => {
-    axios.get('http://localhost:5001/api/fruits')
+    axios.get(`${import.meta.env.VITE_API_URL}/api/fruits`)
       .then(res => setAllFruits(res.data))
       .catch(() => setAllFruits(FRUITS_STATIC)); // fallback to static data
   }, []);
